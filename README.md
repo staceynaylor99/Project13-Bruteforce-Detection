@@ -79,3 +79,53 @@ if ($Events.Count -ge 6) {
     Write-Host "Failed logons in last 5 minutes: $($Events.Count)"
     Write-Host "No brute-force behavior detected."
 }
+
+Note:
+For testing and screenshots, I also ran a variant that looked back 1 hour with a lower threshold. In a real SOC, thresholds and time windows are tuned based on environment noise and risk.
+
+How to Run the Detection
+
+Log onto a Windows machine with Security auditing enabled.
+
+Generate some failed logons (enter the wrong password multiple times).
+
+Open Windows PowerShell as Administrator.
+
+Run:
+
+.\BruteForceDetect.ps1
+
+
+If enough failures occurred in the last 5 minutes, you’ll see an ALERT message.
+
+Skills Demonstrated
+
+Reading and filtering Windows Security Event Logs
+
+Understanding authentication events (4625 and 4624)
+
+Identifying brute-force / password-guessing patterns
+
+Writing a PowerShell script to query and aggregate events
+
+Turning raw log data into a simple detection + alert
+
+Documenting the investigation with screenshots and notes
+
+Future Improvements
+
+If I extend this project, possible next steps include:
+
+Exporting events to a SIEM (Splunk/Sentinel/ELK) and recreating the detection there
+
+Adding filters by username, source IP, or workstation
+
+Creating different thresholds for internal vs external login attempts
+
+Alerting on “many failures followed by a success” for possible account takeover
+
+Author: Stacey Naylor
+Focus: SOC Analyst / Detection Engineering – Windows log analysis and brute-force detection
+
+
+
